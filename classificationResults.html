@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href='bootstrap.min.css' rel='stylesheet' type='text/css'>
+		<script src="jquery.min.js"></script>
+		<script src="bootstrap.min.js" charset="utf-8"></script>
+		
+
+		<link href='classificationResults.css' rel='stylesheet' type='text/css'>
+		<script src="classificationResults.js" charset="utf-8"></script>
+	</head>
+	<body>
+
+<button id="showExp" class="btn-primary" type="button">Show Experiment Description</button>
+<button id="showOut" class="btn-primary" type="button">Show Classification Output</button>
+<button id="showInfoGain" class="btn-primary" type="button">Show Information Gain</button>
+
+<pre id="wekaOut">
+	=== Run information ===
+
+	Scheme:       weka.classifiers.functions.LibSVM -S 0 -K 0 -D 3 -G 0.0 -R 0.0 -N 0.5 -M 40.0 -C 1.0 -E 0.001 -P 0.1 -model /home/joan/weka-3-7-11 -seed 1
+	Relation:     TENSORauthor_SyntacticFeatures_CharacterBasedFeatures_WordBasedFeatures_SentenceBasedFeatures_SentenceBasedFeatures_DictionaryBasedFeatures_DiscourseFeatures.arff-weka.filters.unsupervised.attribute.Standardize
+	Instances:    236
+	Attributes:   162
+	              [list of attributes omitted]
+	Test mode:    10-fold cross-validation
+
+	=== Classifier model (full training set) ===
+
+	LibSVM wrapper, original code by Yasser EL-Manzalawy (= WLSVM)
+
+	Time taken to build model: 0.09 seconds
+
+	=== Stratified cross-validation ===
+	=== Summary ===
+
+	Correctly Classified Instances         205               86.8644 %
+	Incorrectly Classified Instances        31               13.1356 %
+	Kappa statistic                          0.8391
+	Mean absolute error                      0.0438
+	Root mean squared error                  0.2092
+	Relative absolute error                 16.052  %
+	Root relative squared error             56.6689 %
+	Coverage of cases (0.95 level)          86.8644 %
+	Mean rel. region size (0.95 level)      16.6667 %
+	Total Number of Instances              236     
+
+	=== Detailed Accuracy By Class ===
+
+	                 TP Rate  FP Rate  Precision  Recall   F-Measure  MCC      ROC Area  PRC Area  Class
+	                 0,902    0,046    0,804      0,902    0,851      0,819    0,928     0,743     alNusra.txt
+	                 0,647    0,009    0,846      0,647    0,733      0,723    0,819     0,573     alMaqdisi.txt
+	                 0,844    0,020    0,871      0,844    0,857      0,835    0,912     0,756     alKhorasani.txt
+	                 1,000    0,000    1,000      1,000    1,000      1,000    1,000     1,000     musaCerantonio.txt
+	                 0,837    0,052    0,783      0,837    0,809      0,765    0,893     0,685     alAdnani.txt
+	                 0,830    0,033    0,880      0,830    0,854      0,814    0,899     0,769     alBaghdadi.txt
+	Weighted Avg.    0,869    0,028    0,871      0,869    0,868      0,842    0,920     0,782     
+
+	=== Confusion Matrix ===
+
+	  a  b  c  d  e  f   <-- classified as
+	 37  1  2  0  0  1 |  a = alNusra.txt
+	  5 11  1  0  0  0 |  b = alMaqdisi.txt
+	  1  0 27  0  3  1 |  c = alKhorasani.txt
+	  0  0  0 50  0  0 |  d = musaCerantonio.txt
+	  2  1  0  0 36  4 |  e = alAdnani.txt
+	  1  0  1  0  7 44 |  f = alBaghdadi.txt
+  </pre>
+
+
+  <pre id="wekaInfoGain">
+
+	=== Run information ===
+
+	Evaluator:    weka.attributeSelection.InfoGainAttributeEval 
+	Search:       weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+	Relation:     TENSORauthor_SyntacticFeatures_CharacterBasedFeatures_WordBasedFeatures_SentenceBasedFeatures_SentenceBasedFeatures_DictionaryBasedFeatures_DiscourseFeatures.arff-weka.filters.unsupervised.attribute.Standardize
+	Instances:    236
+	Attributes:   162
+	              [list of attributes omitted]
+	Evaluation mode:    evaluate on all training data
+
+
+
+	=== Attribute Selection on all input data ===
+
+	Search Method:
+		Attribute ranking.
+
+	Attribute Evaluator (supervised, Class (nominal): 162 label):
+		Information Gain Ranking Filter
+
+	Ranked attributes:
+	 0.7428     21 WordBasedFeatures_VocabularyRichness
+	 0.6961     48 DISCSHAPE_discramFactor
+	 0.6961     49 DISCSHAPE_discwidth
+	 0.5832     45 DictionaryBasedFeatures_TokenRatioHappy
+	 0.5447     41 DictionaryBasedFeatures_TokenRatioDontCare
+	 0.5257     80 SYNPOS_PRP$
+	 0.4821     42 DictionaryBasedFeatures_EmotionRatioHappy
+	 0.4586     50 DISCSHAPE_discdepth
+	 0.4099     26 DictionaryBasedFeatures_Interjections
+	 0.3848     31 DictionaryBasedFeatures_EmotionRatioInspired
+	 0.366      11 CharacterBasedFeatures_hyphens
+	 0.3572     25 DictionaryBasedFeatures_EmotionRatio
+	 0.3521     47 DictionaryBasedFeatures_TokenRatioAmused
+	 0.3441     88 SYNPOS_DT
+	 0.335      37 DictionaryBasedFeatures_EmotionRatioAngry
+	 0.3335     12 CharacterBasedFeatures_dots
+	 0.3275     70 SentenceBasedFeatures_wordsPerSentence
+	 0.3239     22 WordBasedFeatures_ProperNouns
+	 0.3103     10 CharacterBasedFeatures_semicolons
+	 0.2893     96 SYNDEP_PMOD
+	 0.2883     30 DictionaryBasedFeatures_EmotionRatioAmused
+	 0.2874     14 WordBasedFeatures_FirstPlural
+	 0.2871      6 CharacterBasedFeatures_UpperCases
+	 0.2767     98 SYNDEP_NAME
+	 0.2741     40 DictionaryBasedFeatures_TokenRatioInspired
+	 0.2715     95 SYNDEP_PRN
+	 0.2714    132 SYNPOS_:
+	 0.271     151 SYNDEP_MNR
+	 0.2705    146 SYNDEP_AMOD
+	 0.2695      5 CharacterBasedFeatures_commas
+	 0.2686     69 SentenceBasedFeatures_Range
+	 0.2661     15 WordBasedFeatures_CharsPerWord
+	 0.2639     24 WordBasedFeatures_STD
+	 0.2616     97 SYNPOS_WDT
+	 0.26       76 SYNPOS_PRP
+	 0.2574     64 DISCREL_background
+	 0.2412     35 DictionaryBasedFeatures_TokenRatioSad
+	 0.2409     44 DictionaryBasedFeatures_EmotionRatioAfraid
+	 0.2406     38 DictionaryBasedFeatures_EmotionRatioDontCare
+	 0.2327     34 DictionaryBasedFeatures_TokenRatioAnnoyed
+	 0.2259    100 SYNDEP_COORD
+	 0.2246    145 SYNPOS_RB
+	 0.2243    125 SYNPOS_CD
+	 0.2181    158 SYNDEP_NMOD
+	 0.2179     54 DISCREL_condition
+	 0.2152     27 DictionaryBasedFeatures_TokenRatioAfraid
+	 0.2131     94 SYNPOS_NNPS
+	 0.2123      2 CharacterBasedFeatures_colons
+	 0.2063    153 SYNPOS_JJ
+	 0.2005    126 SYNPOS_,
+	 0.1967     84 SYNPOS_VBN
+	 0.1966    139 SYNDEP_CONJ
+	 0.1919     33 DictionaryBasedFeatures_Negative
+	 0.1881     93 SYNDEP_PRD
+	 0.1873    150 SYNPOS_HYPH
+	 0.1859     17 WordBasedFeatures_Range
+	 0.1814    123 SYNPOS_CC
+	 0.178      79 SYNDEP_SBJ
+	 0.178     106 SYNDEP_ADV
+	 0.1693    140 SYNDEP_P
+	 0.1691     39 DictionaryBasedFeatures_DiscourseMarkers
+	 0.1652     67 DISCREL_joint
+	 0.1644    112 SYNPOS_NN
+	 0.1638     99 SYNPOS_IN
+	 0.1582      3 CharacterBasedFeatures_Numbers
+	 0.1577    114 SYNPOS_WP
+	 0.1508    101 SYNDEP_SUB
+	 0.1491     18 WordBasedFeatures_FirstSingular
+	 0.1484     86 SYNDEP_HYPH
+	 0.1479     66 DISCREL_explanation
+	 0.1449     60 DISCREL_elaboration
+	 0.1435     71 SentenceBasedFeatures_STD
+	 0.1423    148 SYNDEP_LGS
+	 0.1415     59 DISCREL_temporal
+	 0.1414    157 SYNDEP_HMOD
+	 0.138      68 DISCREL_attribution
+	 0.137       9 CharacterBasedFeatures_charsinparenthesis
+	 0.1293    121 SYNDEP_OBJ
+	 0.129      23 WordBasedFeatures_Acronyms
+	 0.1244    152 SYNPOS_SQSQ
+	 0.1233     92 SYNPOS_NNP
+	 0.1198    122 SYNDEP_TITLE
+	 0.1169    131 SYNPOS_VBG
+	 0.1163     55 DISCREL_same-unit
+	 0.0815     91 SYNPOS_SYM
+	 0.0678     81 SYNPOS_WP$
+	 0          53 DISCREL_comparison
+	 0          51 DISCREL_textual-organization
+	 0          52 DISCREL_contrast
+	 0          32 DictionaryBasedFeatures_EmotionRatioSad
+	 0          46 DictionaryBasedFeatures_TokenRatioAngry
+	 0           8 CharacterBasedFeatures_exclamations
+	 0          13 CharacterBasedFeatures_wordsinparenthesis
+	 0           7 CharacterBasedFeatures_questions
+	 0          43 DictionaryBasedFeatures_EmotionRatioAnnoyed
+	 0           4 CharacterBasedFeatures_quotations
+	 0          16 WordBasedFeatures_threeWords
+	 0          19 WordBasedFeatures_twoWords
+	 0          20 WordBasedFeatures_Stopwords
+	 0          28 DictionaryBasedFeatures_Curse
+	 0          36 DictionaryBasedFeatures_Abbrev
+	 0          57 DISCREL_enablement
+	 0          29 DictionaryBasedFeatures_Positive
+	 0          56 DISCREL_TEXT
+	 0         161 SYNDEP_GAP-PRP
+	 0          58 DISCREL_topic-comment
+	 0         130 SYNDEP_EXTR
+	 0         129 SYNPOS_(
+	 0         133 SYNDEP_APPO
+	 0          61 DISCREL_evaluation
+	 0         134 SYNDEP_GAP-OBJ
+	 0         128 SYNPOS_)
+	 0         127 SYNPOS_.
+	 0         124 SYNPOS_$
+	 0         120 SYNPOS_POS
+	 0         117 SYNPOS_JJR
+	 0         118 SYNDEP_OPRD
+	 0         119 SYNDEP_BNF
+	 0         135 SYNDEP_TMP
+	 0         136 SYNDEP_SUFFIX
+	 0         137 SYNDEP_DEP
+	 0         149 SYNDEP_EXT
+	 0         155 SYNDEP_EXTR-GAP
+	 0         156 SYNDEP_VOC
+	 0         159 SYNDEP_GAP-SBJ
+	 0         154 SYNPOS_WRB
+	 0         147 SYNPOS_PDT
+	 0         138 SYNDEP_IM
+	 0         144 SYNDEP_LOC
+	 0         141 SYNPOS_RP
+	 0         142 SYNPOS_EX
+	 0         143 SYNPOS_MD
+	 0         116 SYNPOS_JJS
+	 0         115 SYNPOS_VBZ
+	 0         113 SYNDEP_GAP-VC
+	 0          74 SYNPOS_TO
+	 0          77 SYNDEP_VC
+	 0          78 SYNPOS_VBP
+	 0         160 SYNDEP_PRD-PRP
+	 0          75 SYNDEP_DIR
+	 0          73 SYNDEP_GAP-LOC
+	 0          83 SYNDEP_DIR-GAP
+	 0          72 SYNPOS_PRF
+	 0          62 DISCREL_manner-means
+	 0          63 DISCREL_cause
+	 0          65 DISCREL_summary
+	 0          82 SYNPOS_VBD
+	 0          85 SYNDEP_PRT
+	 0         111 SYNPOS_RBR
+	 0         105 SYNDEP_PRD-TMP
+	 0         108 SYNDEP_PUT
+	 0         109 SYNDEP_DEP-GAP
+	 0         110 SYNPOS_RBS
+	 0         107 SYNDEP_POSTHON
+	 0         104 SYNDEP_LOC-PRD
+	 0          87 SYNDEP_PRP
+	 0         103 SYNDEP_DTV
+	 0          89 SYNPOS_UH
+	 0          90 SYNPOS_NNS
+	 0         102 SYNPOS_VB
+	 0           1 CharacterBasedFeatures_parenthesis
+
+	Selected attributes: 21,48,49,45,41,80,42,50,26,31,11,25,47,88,37,12,70,22,10,96,30,14,6,98,40,95,132,151,146,5,69,15,24,97,76,64,35,44,38,34,100,145,125,158,54,27,94,2,153,126,84,139,33,93,150,17,123,79,106,140,39,67,112,99,3,114,101,18,86,66,60,71,148,59,157,68,9,121,23,152,92,122,131,55,91,81,53,51,52,32,46,8,13,7,43,4,16,19,20,28,36,57,29,56,161,58,130,129,133,61,134,128,127,124,120,117,118,119,135,136,137,149,155,156,159,154,147,138,144,141,142,143,116,115,113,74,77,78,160,75,73,83,72,62,63,65,82,85,111,105,108,109,110,107,104,87,103,89,90,102,1 : 161
+
+
+
+  </pre>
+
+<pre id="experimentDetails">
+  	
+	236 texts written by 6 different jihadist figures:
+
+		 - Al Adnani
+		 - Al Baghdadi
+		 - Al Khorasani
+		 - Al Maqdisi
+		 - Al Nusra
+		 - Musa Cerantonio
+
+	We automatically extract 161 features:
+
+	Character-based:
+		ex: Frequencies of parenthesis, colons, periods, commas, exclamations, upper-cased characters, etc.
+
+	Word-based:
+		ex: Mean number of chars per word, usage of first person singular/plural pronouns, proper nouns, acronyms, etc.
+
+	Dictionary-based:
+		ex: positive/negative words, words that evoke happiness, sadness, fear... abbreviations, curse words, etc.
+
+	Syntactic:
+		ex: part-of-speech frequencies, syntactic tree width/depth, coordinate/subordinate clause width/depth, dependency frequency, etc.
+		The main group of features, conforms more than 70% of the feature set.
+
+	Discourse:
+		ex: discourse tree width/depth, discourse relation frequencies (mean number of elaborations, attributions...), etc.
+
+	10-fold cross validation.
+	Support Vector Machines to classify.
+
+	6-class supervised machine learning problem.
+
+	Small amount of texts and of different nature: transcriptions of speeches, interviews, general ideologic writings, etc.
+
+	Lexical features are not considered, we focus on the profiling potential of syntax and discourse and obtain very competitive results.
+
+  </pre>
+
+	</body>
+</html>

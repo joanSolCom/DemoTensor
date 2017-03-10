@@ -1,0 +1,10 @@
+.chart{
+	position:relative;
+	text-align:center;
+	padding-right:50px;
+}
+
+#title{
+	text-align: center;
+	color:red;
+}
